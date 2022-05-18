@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+    <t t-name="ModifierProduct">
+        <t t-if="!allow_portion">
+            <div class='modifiers-list' style="height: auto;margin-bottom: 20px;">
+                <t t-foreach="productsgroupby" t-as="productgroup">
+                    <div class="productlist" t-att-data-productgroup-id="productgroup.id">
+                        <t t-foreach="productgroup.products" t-as="product">
+                            <span class="modifier" t-att-data-product-id="product.id">
+                                <div class="button" t-att-data-product-id="product.id">
+                                    <div class="modifier-header">
+                                        <img t-att-src='product.image_url' />
+                                        <span class="modifier-price">
+                                            <t t-esc="widget.env.pos.format_currency(product.lst_price)" />
+                                        </span>
+                                    </div>
+                                    <div class="modifier-name">
+                                        <t t-esc="product.display_name" />
+                                    </div>
+                                </div>
+                            </span>
+                        </t>
+                    </div>
+                </t>
+            </div>
+        </t>
+        <div class='modifier-done'>
+            Done
+            <i class='fa fa-angle-double-right'></i>
+        </div>
+    </t>
+    <t t-name="ProductScreen" t-inherit="point_of_sale.ProductScreen" t-inherit-mode="extension" owl="1">
+        <xpath expr="//div[@class='rightpane']" position="inside">
+            <div class="modifiers-screen products-widget-control oe_hidden">
+                <div class="screen-content" style="border-bottom: dashed 1px rgb(215,215,215);">
+                    <div class="top-content">
+                        <span class='button back'>
+                            <i class='fa fa-angle-double-left'></i>
+                            Cancel
+                        </span>
+                        <h1 class='product-name' style="margin-left: auto;margin-right: auto;display: block;">
+                        </h1>
+                    </div>
+                    <div class="modifier_views">
+                    </div>
+                </div>
+            </div>
+        </xpath>
+    </t>
+</templates>
